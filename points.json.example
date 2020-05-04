@@ -1,0 +1,15 @@
+{
+    "sound": {
+        "prefix": "Soundboard: "
+    },
+    "tts": {
+        "prefix": "TTS",
+        "voice": [ "Brian", "Emma" ]
+    },
+    "redemptions": {
+        "redeemables": [
+            "Drink some water"
+        ],
+        "voice": [ "Emma" ]
+    } 
+}

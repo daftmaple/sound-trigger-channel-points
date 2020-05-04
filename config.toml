@@ -1,0 +1,26 @@
+[[sounds]]
+name = "ding"
+aliases = []
+files = [ "ding.mp3" ]
+volume = 0.5
+
+[[sounds]]
+name = "chirp"
+aliases = []
+files = [ "tng_chirp_clean.mp3" ]
+volume = 0.5
+
+
+[[sounds]]
+name = "pepelaugh"
+aliases = []
+files = [ "ohnonono.ogg" ]
+volume = 0.3
+
+
+[[sounds]]
+name = "kekw"
+aliases = []
+files = [ "kekw.ogg" ]
+volume = 0.2
+
