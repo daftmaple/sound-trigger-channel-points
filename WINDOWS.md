@@ -4,6 +4,7 @@ This is an instruction for self-hosting the application on your own PC.
 
 ## Installation and configuration
 
+0. Download the zipfile of this repository by clicking download ZIP on the main page.
 1. Install nodejs and npm (newest version) on your machine.
     - Node (with npm) is available on https://nodejs.org/en/download/
     - Make sure that it is included in your path
