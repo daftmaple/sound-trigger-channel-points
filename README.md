@@ -73,3 +73,7 @@ By default, the user voice is Brian. Put the desired voice(s) as an array of str
 ### Sound Effects
 
 Sound effects are sounds files located in `www/sound-effects/` and listed in the  `config.toml` file. To add more sound effects, add the file in the sounds directory and the config file.
+
+### How to use this app for Windows (noobs) user
+
+Read [Windows documentation](WINDOWS.md).
