@@ -66,14 +66,20 @@ app.get('/oauth2/twitch', async (req, res) => {
 
 		try {
 			const r = await getAccessToken(e);
-			if (r && await validateUser(r.access_token)) {
-				// Use code
-				const access_token = r.access_token;
-				const refresh_token = r.refresh_token;
-
-				fs.writeFileSync(`./tokens/access`, access_token);
-				fs.writeFileSync(`./tokens/refresh`, refresh_token);
-				res.status(200).send('Matching user_id. SFX WebSocket will be enabled in 1 minute.');
+			if (r) {
+				const uid = await validateUser(r.access_token);
+				if (uid !== null) {
+					// Use code
+					const access_token = r.access_token;
+					const refresh_token = r.refresh_token;
+	
+					fs.writeFileSync(`./tokens/access`, access_token);
+					fs.writeFileSync(`./tokens/refresh`, refresh_token);
+					fs.writeFileSync(`./tokens/id`, uid);
+					res.status(200).send('Matching user_id. Wait for 5 minutes or restart your app.');
+				} else {
+					res.status(400).send('User mismatch');
+				}
 			} else {
 				res.status(400).send('User mismatch');
 			}
