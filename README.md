@@ -17,7 +17,7 @@ Visit [Twitch developer console](https://dev.twitch.tv/console/apps) and registe
 # Run the starting script (make filter and tokens directory)
 mkdir filter tokens
 # Touch a file for regex and both access and refresh token
-touch tokens/access tokens/refresh filter/regex.txt
+touch tokens/access tokens/refresh tokens/id filter/regex.txt
 # Clone the repo
 git clone git@github.com:daftmaple/sound-trigger-channel-points.git
 # Change directory into the repo
