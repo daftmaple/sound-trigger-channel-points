@@ -9,8 +9,8 @@ copy /y nul tokens\access
 copy /y nul tokens\refresh
 copy /y nul tokens\id
 
-copy .env.example .env
-copy points.json.example points.json
+ren .env.example .env
+ren points.json.example points.json
 
 npm install
 

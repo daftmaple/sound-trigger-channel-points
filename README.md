@@ -27,11 +27,11 @@ git clone git@github.com:daftmaple/sound-trigger-channel-points.git
 # Change directory into the repo
 cd sound-trigger-channel-points
 # Copy the .env.example file to .env
-cp .env.example .env
+mv .env.example .env
 # Edit the .env file
 nano .env
 # Copy the points.json.example file to points.json
-cp points.json.example points.json
+mv points.json.example points.json
 # Edit the .env file according to the configuration
 nano points.json
 # Install the dependencies
