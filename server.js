@@ -3,6 +3,7 @@ const express = require('express');
 const socketIO = require('socket.io');
 const Session = require('express-session');
 const fs = require('fs');
+const fetch = require('node-fetch');
 
 const { getSoundEffects, state } = require('./lib/config');
 const { getAccessToken, validateUser } = require('./lib/twitchapi');
@@ -102,6 +103,18 @@ app.get('/oauth2/twitch', async (req, res) => {
 app.get('/api/sounds/list', async (req, res) => {
   const sounds = await getSoundEffects();
   res.json({ sounds });
+});
+
+app.get('/api/tts', async (req, res) => {
+  const url = new URL('https://api.streamelements.com/kappa/v2/speech');
+  Object.keys(req.query).forEach((key) =>
+    url.searchParams.append(key, req.query[key])
+  );
+  const reply = await fetch(url);
+
+  const blob = await reply.arrayBuffer();
+
+  res.send(Buffer.from(blob));
 });
 
 app.get('/api/state', (req, res) => {
