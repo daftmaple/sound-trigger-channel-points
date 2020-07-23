@@ -95,3 +95,8 @@ filter/
 
 # Points config file
 points.json
+
+config.toml
+
+package-lock.json
+yarn.lock
