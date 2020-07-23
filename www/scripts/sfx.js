@@ -159,12 +159,16 @@ async function addToQueue(...items) {
 }
 
 socket.on('tts', async ({ text, voice: voiceInput = 'Brian' }) => {
-  const voice =
-    voiceInput === 'random'
-      ? voiceList[Math.floor(Math.random() * voiceList.length)]
-      : voiceInput;
-  const qs = new URLSearchParams({ voice, text });
-  addToQueue(await loadSoundNoCache(`${ttsBase}?${qs}`));
+  // const voice =
+  //   voiceInput === 'random'
+  //     ? voiceList[Math.floor(Math.random() * voiceList.length)]
+  //     : voiceInput;
+  // const qs = new URLSearchParams({ voice, text });
+  // addToQueue(await loadSoundNoCache(`${ttsBase}?${qs}`));
+
+  document.querySelector('button').click();
+  const ut = new SpeechSynthesisUtterance(text);
+  speechSynthesis.speak(ut);
 });
 
 socket.on('sfx', ({ command, soundEffect, volume = 1 }) => {
