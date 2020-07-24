@@ -2,68 +2,63 @@ const sfxBase = 'sound-effects/';
 const ttsBase = window.location.origin + '/api/tts';
 
 const voiceList = [
-  'Zeina',
-  'Nicole',
-  'Russell',
-  'Ricardo',
-  'Vitoria',
-  'Emma',
-  'Brian',
-  'Amy',
-  'Chantal',
-  'Conchita',
-  'Enrique',
-  'Lucia',
-  'Zhiyu',
-  'Naja',
-  'Mads',
-  'Ruben',
-  'Lotte',
-  'Mathieu',
-  'Lea',
-  'Celine',
-  'Hans',
-  'Vicki',
-  'Marlene',
-  'Karl',
-  'Dora',
-  'Raveena',
-  'Aditi',
-  'Bianca',
-  'Carla',
-  'Giorgio',
-  'Takumi',
-  'Mizuki',
-  'Seoyeon',
-  'Mia',
-  'Liv',
-  'Jacek',
-  'Maja',
-  'Ewa',
-  'Jan',
-  'Ines',
-  'Cristiano',
-  'Carmen',
-  'Tatyana',
-  'Maxim',
-  'Astrid',
-  'Filiz',
-  'Matthew',
-  'Joanna',
-  'Salli',
-  'Kimberly',
-  'Ivy',
-  'Kendra',
-  'Joey',
-  'Justin',
-  'Miguel',
-  'Penelope',
-  'Gwyneth',
-  'Geraint',
+  'Andy',
+  'Annie',
+  'AnxiousAndy',
+  'Denis',
+  'Gene',
+  'Gene2',
+  'Jacky',
+  'Lee',
+  'Mario',
+  'Michael',
+  'Mr',
+  'serious',
+  'Storm',
+  'Tweaky',
+  'aunty',
+  'boris',
+  'croak',
+  'f1',
+  'f2',
+  'f3',
+  'f4',
+  'f5',
+  'iven',
+  'iven2',
+  'iven3',
+  'john',
+  'kaukovalta',
+  'klatt',
+  'klatt2',
+  'klatt3',
+  'klatt4',
+  'linda',
+  'm1',
+  'm2',
+  'm3',
+  'm4',
+  'm5',
+  'm6',
+  'm7',
+  'm8',
+  'max',
+  'michel',
+  'norbert',
+  'quincy',
+  'rob',
+  'robert',
+  'steph',
+  'steph2',
+  'steph3',
+  'travis',
+  'whisper',
+  'whisperf',
+  'zac',
 ];
 
 let soundsPlayed = [];
-/** @type {Map<string, AudioBuffer>} */
+/** @type {Map<string AudioBuffer>} */
 const soundCache = new Map();
 const events = new EventEmitter();
 const queue = {
@@ -141,7 +136,7 @@ async function playQueue() {
 
 async function addToQueue(...items) {
   for (const [i, n] of items.entries()) {
-    if (n instanceof AudioBuffer === false) {
+    if (n.sound === 'sfx') {
       const isString = typeof n === 'string';
       const name = isString ? n : n.location;
       items[i] = {
@@ -149,20 +144,25 @@ async function addToQueue(...items) {
         volume: isString ? 1 : n.volume || 1,
       };
     } else {
-      items[i] = { buffer: n, volume: 1 };
+      items[i] = { buffer: n.location, volume: n.volume };
     }
   }
   queue.list.push({ items });
   playQueue();
 }
 
-socket.on('tts', async ({ text, voice: voiceInput = 'Brian' }) => {
+socket.on('tts', async ({ text, voice: voiceInput = 'm1', volume = 0.75 }) => {
   const voice =
-    voiceInput === 'random'
-      ? voiceList[Math.floor(Math.random() * voiceList.length)]
-      : voiceInput;
+    voiceList.findIndex((i) => i === voiceInput) !== -1
+      ? voiceInput
+      : voiceList[Math.floor(Math.random() * voiceList.length)];
+
   const qs = new URLSearchParams({ voice, text });
-  addToQueue(await loadSoundNoCache(`${ttsBase}?${qs}`));
+  addToQueue({
+    location: await loadSoundNoCache(`${ttsBase}?${qs}`),
+    volume: volume,
+    sound: 'tts',
+  });
 });
 
 socket.on('sfx', ({ command, soundEffect, volume = 1 }) => {
@@ -184,7 +184,7 @@ socket.on('sfx', ({ command, soundEffect, volume = 1 }) => {
     soundsPlayed.push(name);
   }
   const location = sfxBase + name;
-  addToQueue({ location, volume });
+  addToQueue({ location, volume, sound: 'sfx' });
 });
 
 socket.on('skip', () => {

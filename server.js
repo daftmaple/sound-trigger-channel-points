@@ -126,7 +126,7 @@ app.get('/api/tts', async (req, res) => {
 
   const text = decodeURIComponent(encodedText);
   const out = await text2wav(text, {
-    speed: 150,
+    speed: 100,
     voice: 'en+m1',
   });
 

@@ -4,12 +4,14 @@
     },
     "tts": {
         "prefix": "TTS",
-        "voice": [ "Brian", "Emma" ]
+        "voice": [ "Mario", "m1" ],
+        "volume": 0.75
     },
     "redemptions": {
         "redeemables": [
             "Drink some water"
         ],
-        "voice": [ "Emma" ]
+        "voice": [ "Michael" ],
+        "volume": 0.75
     } 
 }
