@@ -118,6 +118,7 @@ app.post('/api/state/tts/toggle', (req, res) => {
 
 app.get('/api/tts', async (req, res) => {
   const encodedText = req.query['text'];
+  const voice = req.query['voice'];
 
   if (!encodedText) {
     res.sendStatus(400);
@@ -127,7 +128,7 @@ app.get('/api/tts', async (req, res) => {
   const text = decodeURIComponent(encodedText);
   const out = await text2wav(text, {
     speed: 100,
-    voice: 'en+m1',
+    voice: `en+${voice}`,
   });
 
   res.send(Buffer.from(out));
