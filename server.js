@@ -3,12 +3,14 @@ const express = require('express');
 const socketIO = require('socket.io');
 const Session = require('express-session');
 const fs = require('fs');
+const text2wav = require('text2wav');
 
 const { getSoundEffects, state } = require('./lib/config');
 const { getAccessToken, validateUser } = require('./lib/twitchapi');
 const events = require('./lib/events');
 
 const ws = require('./lib/ws-client');
+const { encode } = require('punycode');
 
 const base_url = process.env.BASE_URL;
 const redirect_uri = base_url + '/oauth2/twitch';
@@ -112,6 +114,24 @@ app.post('/api/state/tts/toggle', (req, res) => {
   state.tts.enabled = !state.tts.enabled;
   res.json(state);
   updateState();
+});
+
+app.get('/api/tts', async (req, res) => {
+  const encodedText = req.query['text'];
+  const voice = req.query['voice'];
+
+  if (!encodedText) {
+    res.sendStatus(400);
+    return;
+  }
+
+  const text = decodeURIComponent(encodedText);
+  const out = await text2wav(text, {
+    speed: 100,
+    voice: `en+${voice}`,
+  });
+
+  res.send(Buffer.from(out));
 });
 
 app.use((req, res, next) => {

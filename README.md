@@ -71,12 +71,14 @@ If you want to announce channel points redeemables as TTS, list all redeemables 
 
 ### Prefix for TTS and Soundboard
 
-By default, the TTS command is called `TTS` and soundboard starts with `Soundboard: `. To modify this, change the configuration on `points.json`, under `points["tts"]["prefix"]` or `points["sound"]["prefix"]`.
+By default, the TTS command is called `TTS` and soundboard starts with `Soundboard:`. To modify this, change the configuration on `points.json`, under `points["tts"]["prefix"]` or `points["sound"]["prefix"]`.
 
 ### TTS voice
 
-By default, the user voice is Brian. Put the desired voice(s) as an array of string under `["voice"]` on either TTS or redeemables.
+~~By default, the user voice is Brian. Put the desired voice(s) as an array of string under `["voice"]` on either TTS or redeemables.~~
+
+TTS voice can only be set to voice that was defined [in this list](https://github.com/abbr/text2wav.node.js/tree/master/espeak-ng-data/voices/!v)
 
 ### Adding more sound effects
 
-Sound effects are sounds files located in `www/sound-effects/` and listed in the  `config.toml` file. To add more sound effects, add the file in the sounds directory and the config file.
+Sound effects are sounds files located in `www/sound-effects/` and listed in the `config.toml` file. To add more sound effects, add the file in the sounds directory and the config file.

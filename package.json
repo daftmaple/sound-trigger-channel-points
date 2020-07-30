@@ -1,6 +1,6 @@
 {
   "name": "sound-trigger-channel-points",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "A sound trigger bot for Twitch channel points redemptions.",
   "main": "server.js",
   "scripts": {
@@ -24,6 +24,7 @@
     "node-fetch": "^2.6.0",
     "qs": "^6.9.3",
     "socket.io": "^2.2.0",
+    "text2wav": "0.0.13",
     "tmi.js": "^1.4.5"
   }
 }
