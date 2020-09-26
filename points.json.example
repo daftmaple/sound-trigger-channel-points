@@ -5,7 +5,8 @@
     "tts": {
         "prefix": "TTS",
         "voice": [ "Mario", "m1" ],
-        "volume": 0.75
+        "volume": 0.75,
+        "speed": 100
     },
     "redemptions": {
         "redeemables": [
