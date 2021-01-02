@@ -10,7 +10,9 @@ const { getAccessToken, validateUser } = require('./lib/twitchapi');
 const events = require('./lib/events');
 
 const ws = require('./lib/ws-client');
-const { encode } = require('punycode');
+
+const points_config_file = fs.readFileSync('./points.json', 'utf-8');
+const points_config = JSON.parse(points_config_file);
 
 const base_url = process.env.BASE_URL;
 const redirect_uri = base_url + '/oauth2/twitch';
@@ -127,7 +129,7 @@ app.get('/api/tts', async (req, res) => {
 
   const text = decodeURIComponent(encodedText);
   const out = await text2wav(text, {
-    speed: 100,
+    speed: points_config['tts']['speed'] || 100,
     voice: `en+${voice}`,
   });
 
