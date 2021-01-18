@@ -153,8 +153,8 @@ io.on('connection', (socket) => {
   });
 });
 
-events.on('sfx', (...args) => io.emit('sfx', ...args));
-events.on('tts', (...args) => io.emit('tts', ...args));
+events.once('sfx', (...args) => io.emit('sfx', ...args));
+events.once('tts', (...args) => io.emit('tts', ...args));
 
 function updateState() {
   io.emit('state', state);
@@ -167,3 +167,5 @@ io.on('connect', (socket) => {
   });
   socket.on('skip', () => io.emit('skip'));
 });
+
+process.on('warning', (e) => console.warn(e.stack));
