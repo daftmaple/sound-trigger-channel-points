@@ -23,4 +23,3 @@ name = "kekw"
 aliases = []
 files = [ "kekw.ogg" ]
 volume = 0.14
-

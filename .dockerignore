@@ -1,0 +1,7 @@
+.env
+.vscode
+.config/
+windows-*.bat
+*.node_modules
+*.example
+.prettierrc

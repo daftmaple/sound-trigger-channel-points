@@ -87,16 +87,8 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
-# Twitch tokens
-tokens/
-
-# Filters
-filter/
-
-# Points config file
-points.json
-
-config.toml
+# Configurations
+.config/
 
 package-lock.json
 yarn.lock

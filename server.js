@@ -1,8 +1,10 @@
+const fs = require('fs');
+const path = require('path');
+
 require('dotenv').config();
 const express = require('express');
 const socketIO = require('socket.io');
 const Session = require('express-session');
-const fs = require('fs');
 const text2wav = require('text2wav');
 
 const { getSoundEffects, state } = require('./lib/config');
@@ -11,7 +13,10 @@ const events = require('./lib/events');
 
 const ws = require('./lib/ws-client');
 
-const points_config_file = fs.readFileSync('./points.json', 'utf-8');
+const points_config_file = fs.readFileSync(
+  path.join(process.cwd(), '.config', 'points.json'),
+  'utf-8'
+);
 const points_config = JSON.parse(points_config_file);
 
 const base_url = process.env.BASE_URL;
@@ -84,9 +89,18 @@ app.get('/oauth2/twitch', async (req, res) => {
           const access_token = r.access_token;
           const refresh_token = r.refresh_token;
 
-          fs.writeFileSync(`./tokens/access`, access_token);
-          fs.writeFileSync(`./tokens/refresh`, refresh_token);
-          fs.writeFileSync(`./tokens/id`, uid);
+          fs.writeFileSync(
+            path.join(process.cwd(), '.config', 'tokens', 'access'),
+            access_token
+          );
+          fs.writeFileSync(
+            path.join(process.cwd(), '.config', 'tokens', 'refresh'),
+            refresh_token
+          );
+          fs.writeFileSync(
+            path.join(process.cwd(), '.config', 'tokens', 'id'),
+            uid
+          );
           res
             .status(200)
             .send('Matching user_id. Wait for 5 minutes or restart your app.');
