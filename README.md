@@ -51,7 +51,12 @@ The main page may be used for adding more sound effects and other options later.
 
 ```sh
 docker build -t soundboard .
-docker run --detach --env-file .env -v <PATH_TO_CONFIG_DIR>:/usr/src/.config -p <internal>:<external> --name soundboard-container soundboard
+docker run --detach --env-file .env \
+  --restart unless-stopped \
+  -v <PATH_TO_CONFIG_DIR>:/usr/src/.config \
+  -v <PATH_TO_SOUND_EFFECTS_DIR>:/www/sound-effects/
+  -p <internal>:<external> \
+  --name soundboard-container soundboard
 ```
 
 Internal port `<internal>` should match the HTTP_PORT in `.env` file, and external port is the exposed port. By default, both are 8080.

@@ -5,3 +5,4 @@ windows-*.bat
 *.node_modules
 *.example
 .prettierrc
+www/sound-effects/
