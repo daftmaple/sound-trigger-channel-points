@@ -167,8 +167,8 @@ io.on('connection', (socket) => {
   });
 });
 
-events.once('sfx', (...args) => io.emit('sfx', ...args));
-events.once('tts', (...args) => io.emit('tts', ...args));
+events.on('sfx', (...args) => io.emit('sfx', ...args));
+events.on('tts', (...args) => io.emit('tts', ...args));
 
 function updateState() {
   io.emit('state', state);
